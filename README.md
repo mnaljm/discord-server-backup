@@ -63,6 +63,8 @@ pip install -r requirements.txt
 python project_setup.py
 ```
 
+If you are using Python 3.13 or newer, `audioop-lts` is installed automatically so `discord.py` can import `audioop` during startup.
+
 ### 🤖 Discord Bot Setup
 
 1. **Create a Discord Application:**
