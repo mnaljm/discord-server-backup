@@ -48,9 +48,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/mnaljm/Project-yoink"
-Repository = "https://github.com/mnaljm/Project-yoink.git"
-Issues = "https://github.com/mnaljm/Project-yoink/issues"
+Homepage = "https://github.com/mnaljm/discord-server-backup"
+Repository = "https://github.com/mnaljm/discord-server-backup.git"
+Issues = "https://github.com/mnaljm/discord-server-backup/issues"
 
 [project.scripts]
 discord-yoink = "discord_yoink:cli"

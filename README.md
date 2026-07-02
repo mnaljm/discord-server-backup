@@ -42,23 +42,23 @@
 
 **Windows:**
 ```cmd
-git clone https://github.com/mnaljm/discord-yoink.git
-cd discord-yoink
+git clone https://github.com/mnaljm/discord-server-backup.git
+cd discord-server-backup
 setup.bat
 ```
 
 **Linux/macOS:**
 ```bash
-git clone https://github.com/mnaljm/discord-yoink.git
-cd discord-yoink
+git clone https://github.com/mnaljm/discord-server-backup.git
+cd discord-server-backup
 chmod +x setup.sh
 ./setup.sh
 ```
 
 #### Option 2: Manual Setup
 ```bash
-git clone https://github.com/mnaljm/discord-yoink.git
-cd discord-yoink
+git clone https://github.com/mnaljm/discord-server-backup.git
+cd discord-server-backup
 pip install -r requirements.txt
 python project_setup.py
 ```
@@ -318,8 +318,8 @@ Discord Yoink can recreate servers from backups with the following features:
 ### Development Setup
 ```bash
 # Clone the repository
-git clone https://github.com/mnaljm/discord-yoink.git
-cd discord-yoink
+git clone https://github.com/mnaljm/discord-server-backup.git
+cd discord-server-backup
 
 # Install development dependencies
 pip install -r requirements.txt
@@ -350,7 +350,7 @@ python -m build
 
 ### Project Structure
 ```
-discord-yoink/
+discord-server-backup/
 ├── src/                    # Source code modules
 │   ├── backup_manager.py   # Main backup logic
 │   ├── discord_client.py   # Discord API wrapper
