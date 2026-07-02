@@ -10,7 +10,7 @@ REM Check if Python is available
 python --version >nul 2>&1
 if errorlevel 1 (
     echo Error: Python is not installed or not in PATH
-    echo Please install Python 3.8 or higher from https://python.org
+    echo Please install Python 3.9 or higher from https://python.org
     pause
     exit /b 1
 )
@@ -18,7 +18,7 @@ if errorlevel 1 (
 echo Checking Python version...
 python -c "import sys; exit(0 if sys.version_info >= (3, 8) else 1)"
 if errorlevel 1 (
-    echo Error: Python 3.8 or higher is required
+    echo Error: Python 3.9 or higher is required
     python --version
     pause
     exit /b 1

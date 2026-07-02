@@ -22,7 +22,7 @@
 
 ## 🛠️ Built With
 
-- **Python 3.8+** - Core application
+- **Python 3.9+** - Core application
 - **discord.py** - Discord API integration
 - **aiofiles** - Async file operations
 - **click** - Command-line interface

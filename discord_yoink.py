@@ -240,6 +240,29 @@ async def choose_target_server_interactive(client, original_server_name):
             return None
 
 
+async def wait_for_client_ready(client, start_task):
+    """Wait until the client is ready or fail if startup stops first."""
+    ready_task = asyncio.create_task(client.wait_until_ready())
+
+    done, pending = await asyncio.wait(
+        {start_task, ready_task}, return_when=asyncio.FIRST_COMPLETED
+    )
+
+    if start_task in done:
+        ready_task.cancel()
+        try:
+            await ready_task
+        except asyncio.CancelledError:
+            pass
+
+        start_task.result()
+        raise RuntimeError(
+            "Discord client stopped before becoming ready. Check the bot token and permissions."
+        )
+
+    return await ready_task
+
+
 @click.group()
 @click.version_option(version=__version__)
 @click.option("--config", "-c", default="config.json", help="Configuration file path")
@@ -296,7 +319,7 @@ def backup(ctx, server_id, interactive, output, incremental, channels):
             start_task = asyncio.create_task(client.start())
 
             # Wait for the client to be ready
-            await client.wait_until_ready()
+            await wait_for_client_ready(client, start_task)
 
             # Interactive mode - let user choose server
             if interactive:
@@ -486,7 +509,7 @@ def recreate(
             start_task = asyncio.create_task(client.start())
 
             # Wait for the client to be ready
-            await client.wait_until_ready()
+            await wait_for_client_ready(client, start_task)
 
             # Interactive mode - let user choose backup file first
             if interactive:
@@ -555,7 +578,7 @@ def recreate(
                 if start_task:
                     start_task.cancel()
                 start_task = asyncio.create_task(client.start())
-                await client.wait_until_ready()
+                await wait_for_client_ready(client, start_task)
             elif backup_chains:
                 # Backup chain mode - let user choose from available chains
                 backup_path_chosen = choose_backup_chain_interactive("./backups")
@@ -840,7 +863,7 @@ def list_guilds(ctx):
             start_task = asyncio.create_task(client.start())
 
             # Wait for the client to be ready
-            await client.wait_until_ready()
+            await wait_for_client_ready(client, start_task)
 
             guilds = client.guilds
 
@@ -939,7 +962,9 @@ def chains(ctx, backup_dir, merge_all, output_dir):
                         click.echo(f"✅ Merged chain: {chain_name} -> {saved_path}")
                         merged_count += 1
                     else:
-                        click.echo(f"⏭️  Skipped (no incremental backups): {chain_name}")
+                        click.echo(
+                            f"⏭️  Skipped (no incremental backups): {chain_name}"
+                        )
                 except Exception as e:
                     click.echo(f"❌ Failed to merge {chain_name}: {e}")
 
@@ -981,7 +1006,7 @@ def make_admin(ctx, server_id, user_id, role_name, interactive):
         try:
             # Start the client in the background
             start_task = asyncio.create_task(client.start())
-            await client.wait_until_ready()
+            await wait_for_client_ready(client, start_task)
 
             # Interactive mode - let user choose server and user
             if interactive:
@@ -1098,7 +1123,9 @@ def make_admin(ctx, server_id, user_id, role_name, interactive):
                     click.echo(f"✅ Added admin role to user: {display_name}")
 
                 click.echo(f"🆔 Role ID: {result['role_id']}")
-                click.echo(f"\n⚠️  IMPORTANT: This user now has full admin permissions!")
+                click.echo(
+                    f"\n⚠️  IMPORTANT: This user now has full admin permissions!"
+                )
                 click.echo(
                     f"Use 'discord_yoink.py remove-admin' to revoke access when no longer needed."
                 )
@@ -1158,7 +1185,7 @@ def remove_admin(ctx, server_id, user_id, role_name, delete_role, interactive):
         try:
             # Start the client in the background
             start_task = asyncio.create_task(client.start())
-            await client.wait_until_ready()
+            await wait_for_client_ready(client, start_task)
 
             # Interactive mode - let user choose server and user
             if interactive:
