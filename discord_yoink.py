@@ -962,9 +962,7 @@ def chains(ctx, backup_dir, merge_all, output_dir):
                         click.echo(f"✅ Merged chain: {chain_name} -> {saved_path}")
                         merged_count += 1
                     else:
-                        click.echo(
-                            f"⏭️  Skipped (no incremental backups): {chain_name}"
-                        )
+                        click.echo(f"⏭️  Skipped (no incremental backups): {chain_name}")
                 except Exception as e:
                     click.echo(f"❌ Failed to merge {chain_name}: {e}")
 
@@ -1123,9 +1121,7 @@ def make_admin(ctx, server_id, user_id, role_name, interactive):
                     click.echo(f"✅ Added admin role to user: {display_name}")
 
                 click.echo(f"🆔 Role ID: {result['role_id']}")
-                click.echo(
-                    f"\n⚠️  IMPORTANT: This user now has full admin permissions!"
-                )
+                click.echo(f"\n⚠️  IMPORTANT: This user now has full admin permissions!")
                 click.echo(
                     f"Use 'discord_yoink.py remove-admin' to revoke access when no longer needed."
                 )
