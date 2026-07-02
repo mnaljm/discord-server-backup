@@ -45,8 +45,8 @@ def create_directories():
 
 def check_python_version():
     """Check Python version compatibility"""
-    if sys.version_info < (3, 8):
-        print("[ERROR] Python 3.8 or higher is required")
+    if sys.version_info < (3, 9):
+        print("[ERROR] Python 3.9 or higher is required")
         print(f"  Current version: {sys.version}")
         return False
 

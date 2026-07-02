@@ -6,7 +6,7 @@
 echo "Discord Yoink - Setup Script"
 echo "============================="
 
-# Check if Python 3.8+ is available
+# Check if Python 3.9+ is available
 if command -v python3 &> /dev/null; then
     PYTHON_CMD=python3
 elif command -v python &> /dev/null; then
@@ -20,7 +20,7 @@ fi
 echo "Checking Python version..."
 $PYTHON_CMD -c "import sys; exit(0 if sys.version_info >= (3, 8) else 1)"
 if [ $? -ne 0 ]; then
-    echo "Error: Python 3.8 or higher is required"
+    echo "Error: Python 3.9 or higher is required"
     exit 1
 fi
 

@@ -15,7 +15,6 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: End Users/Desktop",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -23,7 +22,7 @@ classifiers = [
     "Topic :: System :: Archiving :: Backup"
 ]
 keywords = ["discord", "backup", "server", "chat", "archive"]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 dependencies = [
     "discord.py>=2.3.2",
     "aiohttp>=3.8.0",
@@ -66,10 +65,10 @@ exclude = ["tests*"]
 
 [tool.black]
 line-length = 88
-target-version = ['py38', 'py39', 'py310', 'py311']
+target-version = ['py39', 'py310', 'py311']
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.9"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
